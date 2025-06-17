@@ -64,17 +64,11 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           name: "Release ${{ github.ref_name }}"
-          body: |
-            Automatisch generierter Release mit AGB-Dokumenten.
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload PDFs to Release
-        uses: softprops/action-gh-release@v2
-        with:
           files: |
             artifacts/agb_privat-pdf/build-agb_privat.pdf
             artifacts/agb_geschaeft-pdf/build-agb_geschaeft.pdf
+          body: |
+            Automatisch generierter Release mit AGB-Dokumenten.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
