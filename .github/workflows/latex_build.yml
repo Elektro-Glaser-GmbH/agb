@@ -6,6 +6,9 @@ on:
       - 'v*'         # Trigger nur bei Tags wie v1.0.0, v2.1 etc.
   workflow_dispatch: # Optional: manueller Trigger über GitHub UI
 
+permissions:
+  contents: write
+  
 jobs:
   build_latex:
     runs-on: ubuntu-latest
