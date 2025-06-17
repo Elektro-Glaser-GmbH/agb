@@ -1,0 +1,11 @@
+title: "🗣️ Feedback oder generelle Anmerkung"
+labels: [feedback]
+body:
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Dein Feedback
+      description: Was läuft gut? Was könnte besser sein?
+      placeholder: "Die PDFs bauen super, aber ich hatte Probleme beim PDF-Download im Release."
+    validations:
+      required: true

@@ -70,8 +70,8 @@ Die Inhalte der AGB unterliegen dem Urheberrecht der **Elektro-Glaser GmbH**.
 
 ## 🧑‍🔧 Kontakt
 
-**Elektro-Glaser GmbH**
-🧾 Handelsregistereintrag: HRB 21834 beim Amtsgericht Fürth
-📍 Erlangen, Deutschland  
-📧 [info@e-glaser.de](mailto:info@e-glaser.de)  
-🌐 [www.e-glaser.de](https://www.e-glaser.de)
+**Elektro-Glaser GmbH**<br/>
+🧾 Handelsregistereintrag: HRB 21834 beim Amtsgericht Fürth<br/>
+📍 Erlangen, Deutschland<br/>
+📧 [info@e-glaser.de](mailto:info@e-glaser.de)<br/>
+🌐 [www.e-glaser.de](https://www.e-glaser.de)<br/>

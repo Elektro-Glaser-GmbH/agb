@@ -1,0 +1,21 @@
+title: "💡 Idee oder Verbesserungsvorschlag"
+labels: [enhancement, idea]
+body:
+  - type: markdown
+    attributes:
+      value: "Danke für dein Interesse, das Projekt besser zu machen! 🙌"
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: Deine Idee
+      description: Was möchtest du ändern oder verbessern?
+      placeholder: "Ich schlage vor, die Mahngebühren klarer zu definieren..."
+    validations:
+      required: true
+
+  - type: input
+    id: benefit
+    attributes:
+      label: Was bringt das?
+      description: Welches Problem wird dadurch gelöst oder welche Klarheit geschaffen?

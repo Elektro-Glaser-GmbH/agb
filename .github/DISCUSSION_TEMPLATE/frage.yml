@@ -1,0 +1,23 @@
+title: "❓ Frage zur AGB / Technik"
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bitte beschreibe deine Frage möglichst klar und konkret. Ob rechtlich oder technisch – alles ist willkommen!
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Deine Frage
+      description: Was möchtest du wissen oder verstehen?
+      placeholder: "Wie kann ich einen Paragraphen optisch kürzen? Ist §13 BGB hier relevant?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Hintergrund (optional)
+      description: "Gib uns Kontext: Privat- oder Geschäftskunde? Build-Problem? Rechtliches?"
+      placeholder: "Ich nutze das AGB-Dokument für ein kleines Handwerksunternehmen..."
