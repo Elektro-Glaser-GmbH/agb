@@ -1,0 +1,26 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "remoteUser": "texlive",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "james-yu.latex-workshop",
+                "nickfode.latex-formatter",
+                "mathematic.vscode-latex",
+                "ms-azuretools.vscode-docker",
+                "meezilla.json",
+                "valentjn.vscode-ltex",
+                "ms-python.python",
+                "tamasfe.even-better-toml",
+                "samuelcolvin.jinjahtml"
+            ]
+        }
+    },
+    "mounts": [
+        // "source=${env:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached" // Windows only to use Git credentials
+    ],
+    "postCreateCommand": ".devcontainer/postCreateCommands.sh",
+    "postAttachCommand": "git config --global core.editor \"code --wait\""
+}

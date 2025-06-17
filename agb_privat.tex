@@ -1,0 +1,278 @@
+\documentclass[fontsize=12pt,parskip=half]{scrartcl}
+\usepackage[ngerman]{babel}
+%\usepackage{german}
+\usepackage{eurosym}
+\usepackage[T1]{fontenc}
+% Hinweis: Nur einer der beiden folgenden Zeilen wird benötigt.
+%\usepackage{lmodern}
+\usepackage{charter,helvet}
+
+\usepackage{lastpage} 
+\usepackage{enumerate}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\alph*), ref=\alph*}
+\usepackage{endnotes}
+
+\usepackage{ifthen}
+\usepackage{pgffor}
+\usepackage{fp}
+\usepackage{makecell}
+
+\usepackage{siunitx}
+
+
+% Definition für Euro-Darstellung
+\sisetup{
+  locale = DE,           % Deutsche Zahlenformatierung
+  group-separator = {.}, % Tausendertrennzeichen (Punkt)
+  output-decimal-marker = {,} % Dezimaltrennzeichen (Komma)
+}
+
+%\newcommand{\eurodash}[1]{\EUR{#1}}
+\newcommand{\eurodash}[1]{%
+  \num[group-minimum-digits=4,round-precision=0,round-mode=places]{#1},--~€%
+}
+\newcommand{\tsep}[1]{\num[group-minimum-digits=4,round-precision=0,round-mode=places]{#1}}
+
+%\usepackage[clausemark=forceboth,juratotoc,juratocnumberwidth=2.5em]{contract}
+\usepackage[juratotoc,juratocnumberwidth=2.5em]{contract}
+\useshorthands{'}
+\defineshorthand{'S}{\Sentence\ignorespaces}
+\defineshorthand{'.}{. \Sentence\ignorespaces}
+\RedeclareSectionCommand[
+  beforeskip=-1ex plus -0.5ex minus -0.5ex,
+  afterskip=0.5ex plus 0.2ex minus 0.2ex
+]{section}
+
+\input{variables.tex}
+
+\author{}
+
+\usepackage[breaklinks=false]{hyperref} % Ermöglicht klickbare Links
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={Allgemeine Geschäftsbedingungen der \companyName - privat},
+    pdfauthor={\authorName},
+    pdfcreator={LaTeX}
+}
+\usepackage{fancyhdr} % Paket für Kopf- und Fußzeilen
+
+\pagestyle{fancy}
+\fancyhf{} 
+
+%\fancyfoot[R]{Seite \thepage} % Seitennummer rechts
+
+%\pagestyle{myheadings}
+\fancyhead[R]{\leftmark}
+\fancyfoot[R]{\companyName\ - \companyLocation\ - \effDate \hspace{0.5cm}-\hspace{0.5cm}Seite \thepage\ von\ \pageref*{LastPage}} % Datum rechts
+
+% Reduzierung des Abstands vor \Clause
+
+
+\newcommand{\refCPS}[1]{\refClause{#1}~\refParS{#1}}
+\renewcommand{\notesname}{Endnoten}
+
+\begin{document}
+
+\setkeys{contract}{preskip=0.5ex,postskip=0.3ex}
+
+\subject{\large Allgemeine Geschäftsbedingungen - Privatkunden}
+\title{\large \companyName}
+\subtitle{\normalsize \companyLocation}
+\date{\small \effDate}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Allgemeines}
+
+\begin{contract}
+
+\Clause[title={Geltungsbereich}]
+
+Diese AGB gelten für alle Verträge mit privaten Endkunden (\emph{Verbraucher} i.S.d. §13 BGB), bei denen die \companyName{} handwerkliche Leistungen erbringt und/oder Materialien liefert. 
+
+Für Verträge mit Unternehmen, juristischen Personen des öffentlichen Rechts oder öffentlich-rechtlichen Sondervermögen gelten gesonderte Bedingungen.
+
+
+\Clause[title={Vertragsgrundlagen}]
+
+Grundlage der vertraglichen Leistungen sind das Angebot in seiner angenommenen Form sowie diese AGB. Abweichende Vereinbarungen im Angebot haben Vorrang vor diesen Bedingungen.
+
+Die vom Besteller unterzeichnete Bestellung ist ein bindendes Angebot. Wir können dieses Angebot innerhalb von zwei Wochen durch Zusendung einer Auftragsbestätigung annehmen oder innerhalb dieser Frist die bestellte Ware zusenden.
+
+\Clause[title={Unterlagen, Eigentum und Rechte}]
+
+Die \companyName{} behält sich das Eigentum und Urheberrecht an allen Angeboten, Zeichnungen, Plänen und technischen Unterlagen vor. Eine Weitergabe an Dritte ist nur mit schriftlicher Zustimmung gestattet. Zuwiderhandlung verpflichtet zum Schadensersatz.
+
+
+\Clause[title={Mitwirkungspflichten}]
+
+Der Auftraggeber hat sämtliche bauseits erforderlichen Vorleistungen (z.B. Strom, Zugang, Genehmigungen) rechtzeitig zu erbringen. Verzögerungen durch unterlassene Mitwirkung verlängern Fristen angemessen.
+
+\end{contract}
+
+\section{Preise und Zahlung}
+
+\begin{contract}
+
+\Clause[title={Preise}]
+
+Alle Preise verstehen sich in Euro inkl. der gesetzlichen Mehrwertsteuer, sofern nicht anders angegeben. Verpackung, Transport und Versicherung werden separat berechnet.
+
+\Clause[title={Zahlungsbedingungen}]
+
+Sofern nichts Abweichendes vereinbart ist, ist der Rechnungsbetrag binnen 10 Tagen ohne Abzug zu begleichen. Bei Zahlungsverzug werden Verzugszinsen in Höhe von 5\%-Punkten über dem Basiszinssatz berechnet.
+
+Zahlungen haben ausschließlich auf das Konto \newline
+\begin{minipage}[t]{\dimexpr\linewidth-2em}
+  \vspace{0.1em}\hspace{2em}
+\begin{tabular}{ll}
+  \textbf{IBAN} & \accountIBAN{} \\
+  \textbf{BIC} & \accountBIC{} \\
+  \textbf{Bank} & \accountBank{} \\
+\end{tabular}\vspace{0.5em}
+\end{minipage}\newline
+zu erfolgen. 
+
+Der Abzug von Skonto ist nur bei schriftlicher besonderer Vereinbarung zulässig.
+
+
+\Clause[title={Aufrechnung und Zurückbehaltungsrecht}]
+
+Ein Zurückbehaltungsrecht steht dem Auftraggeber nur zu, wenn es auf demselben Vertragsverhältnis beruht. 
+
+Eine Aufrechnung ist nur mit unbestrittenen oder rechtskräftig festgestellten Gegenforderungen zulässig.
+
+\end{contract}
+
+\section{Lieferung und Leistung}
+
+\begin{contract}
+
+\Clause[title={Termine}]
+
+Lieferungen und Leistungen stehen unter dem Vorbehalt rechtzeitiger Selbstbelieferung. Die \companyName{} wird den Auftraggeber unverzüglich über Verzögerungen informieren. 
+
+Leistungs- oder Lieferfristen sind nur verbindlich, wenn sie ausdrücklich schriftlich vereinbart wurden. Verzögerungen durch höhere Gewalt oder unvorhersehbare Umstände führen zu angemessener Fristverlängerung.
+
+Der Beginn der von uns angegebenen Lieferzeit setzt die rechtzeitige und ordnungsgemäße Erfüllung der Verpflichtungen des Bestellers voraus. Die Einrede des nicht erfüllten Vertrages bleibt vorbehalten.
+
+Der Besteller kann zwei Wochen nach Überschreitung eines unverbindlichen Liefertermins uns in Textform auffordern binnen einer angemessenen Frist zu liefern. Sollten wir einen ausdrücklichen Liefertermin schuldhaft nicht einhalten oder wenn wir aus anderem Grund in Verzug geraten, so muss der Besteller uns eine angemessene Nachfrist zur Bewirkung der Leistung setzen. Wenn wir die Nachfrist fruchtlos verstreichen lassen, so ist der Besteller berechtigt, vom Kaufvertrag zurückzutreten.
+
+Kommt der Besteller in Annahmeverzug oder verletzt er schuldhaft sonstige Mitwirkungspflichten, so sind wir berechtigt, den uns hierdurch entstehenden Schaden, einschließlich etwaiger Mehraufwendungen ersetzt zu verlangen. Weitergehende Ansprüche bleiben vorbehalten. Dem Besteller bleibt seinerseits vorbehalten nachzuweisen, dass ein Schaden in der verlangten Höhe überhaupt nicht oder zumindest wesentlich niedriger entstanden ist. Die Gefahr eines zufälligen Untergangs oder einer zufälligen Verschlechterung der Kaufsache geht in dem Zeitpunkt auf den Besteller über, in dem dieser in Annahme- oder Schuldnerverzug gerät.
+
+Weitere gesetzliche Ansprüche und Rechte des Bestellers wegen eines Lieferverzuges bleiben unberührt.
+
+\Clause[title={Gefahrübergang und Abnahme}]
+
+Die Gefahr geht mit Übergabe oder bei Verzug des Auftraggebers auf diesen über. Werkleistungen gelten als abgenommen, wenn die Abnahme nicht binnen einer gesetzten Frist erfolgt oder wenn die Leistung in Benutzung genommen wird.
+
+
+\Clause[title={Eigentumsvorbehalt}]
+
+Gelieferte Waren bleiben bis zur vollständigen Bezahlung Eigentum der \companyName{}. Eine Verarbeitung oder Verbindung mit anderen Sachen erfolgt stets im Auftrag der \companyName{}.
+
+\end{contract}
+
+\section{Gewährleistung und Haftung}
+
+\begin{contract}
+
+\Clause[title={Mängelansprüche}]
+
+Mängel sind unverzüglich schriftlich zu rügen. Die \companyName{} hat das Recht auf Nachbesserung oder Ersatzlieferung. Schlägt die Nachbesserung dreimal fehl oder wird sie unberechtigt verweigert, kann der Kunde mindern oder zurücktreten.
+
+Soweit die in unseren Prospekten, Anzeigen und sonstigen Angebotsunterlagen enthaltenen Angaben nicht von uns ausdrücklich als verbindlich bezeichnet worden sind, sind die dort enthaltenen Abbildungen oder Zeichnungen nur annähernd maßgebend
+
+Die Sache entspricht nicht den subjektiven Anforderungen, wenn
+\begin{enumerate}
+	\item sie nicht die zwischen dem Besteller und uns vereinbarte Beschaffenheit aufweist oder
+	\item sie sich nicht für die nach unserem Vertrag vorausgesetzte Verwendung eignet oder
+	\item sie nicht mit dem vereinbarten Zubehör und den vereinbarten Anleitungen, einschließlich Montage- und Installationsanleitungen, übergeben wird.
+\end{enumerate}
+
+Soweit nicht zwischen dem Besteller und uns unter Beachtung der geltenden Informations- und Formvorschriften etwas anderes vereinbart wurde, entspricht die Sache nicht den objektiven Anforderungen, wenn
+\begin{enumerate}
+	\item sie sich nicht für die gewöhnliche Verwendung eignet oder
+	\item sie nicht die Beschaffenheit aufweist, die bei Sachen derselben Art üblich ist und die der Besteller erwarten kann unter Berücksichtigung der Art der Sache und der öffentlichen Äußerungen, die von uns oder einem anderen Glied der Vertragskette oder in deren Auftrag, insbesondere in der Werbung oder auf dem Etikett, abgegeben wurden oder
+	\item wenn sie nicht der Beschaffenheit einer Probe oder eines Musters entspricht, die oder das wir dem Besteller vor Vertragsschluss zur Verfügung gestellt haben, oder
+	\item wenn sie nicht mit dem Zubehör einschließlich der Verpackung, der Montage- oder Installationsanleitung sowie anderen Anleitungen übergeben wird, deren Erhalt der Besteller erwarten kann.
+\end{enumerate}
+
+Eine wirksame anderweitige Vereinbarung zwischen dem Besteller und uns über die objektiven Anforderungen der Sache setzt voraus, dass der Besteller vor Abgabe seiner Vertragserklärung eigens davon in Kenntnis gesetzt wurde, dass ein bestimmtes Merkmal der Ware von den objektiven Anforderungen abweicht, und die Abweichung in diesem Sinne im Vertrag ausdrücklich und gesondert vereinbart wurde.
+
+\Clause[title={Nacherfüllung und Nachbesserung}]
+
+Der Besteller hat zunächst die Wahl, ob die Nacherfüllung durch Nachbesserung oder Ersatzlieferung erfolgen soll. Wir sind jedoch berechtigt, die vom Besteller gewählte Art der Nacherfüllung zu verweigern, wenn sie nur mit unverhältnismäßigen Kosten möglich ist und die andere Art der Nacherfüllung ohne erhebliche Nachteile für den Besteller bleibt. 
+
+Eine Nachbesserung gilt mit dem erfolglosen zweiten Versuch als fehlgeschlagen, wenn sich nicht insbesondere aus der Art der Sache oder des Mangels oder den sonstigen Umständen etwas anderes ergibt. 
+
+Während der Nacherfüllung sind die Herabsetzung des Kaufpreises oder der Rücktritt vom Vertrag durch den Besteller ausgeschlossen. 
+
+Ist die Nacherfüllung fehlgeschlagen oder haben wir die Nacherfüllung insgesamt verweigert, kann der Besteller nach seiner Wahl Herabsetzung des Kaufpreises (Minderung) verlangen oder den Rücktritt vom Vertrag erklären.
+
+Der Besteller hat uns keine Frist zur Nacherfüllung zu setzen. Sobald der Besteller uns über den Mangel unterrichtet hat, eine angemessene Frist abgelaufen ist und bis dahin keine Nacherfüllung erfolgt ist, ist der Besteller ebenfalls zum Rücktritt oder zur Minderung berechtigt.
+
+Schadensersatzansprüche zu den nachfolgenden Bedingungen wegen des Mangels kann der Besteller erst geltend machen, wenn die Nacherfüllung fehlgeschlagen ist oder wir die Nacherfüllung verweigert haben. Der Besteller hat uns keine Frist zur Nacherfüllung zu setzen. Sobald der Besteller uns über den Mangel unterrichtet hat, eine angemessene Frist abgelaufen ist und bis dahin keine Nacherfüllung erfolgt ist, ist der Besteller ebenfalls zur Geltendmachung von Schadensersatzansprüchen berechtigt. 
+
+Das Recht des Bestellers zur Geltendmachung von weitergehenden Schadensersatzansprüchen zu den nachfolgenden Bedingungen bleibt davon unberührt.
+
+\Clause[title={Gewährleistung}]
+
+Die Gewährleistungsfrist beträgt grundsätzlich 2 Jahre, gerechnet ab Gefahrenübergang. Bei Arbeiten an Gebäuden gemäß § 634a Abs. 1 Nr. 2 BGB beträgt sie fünf Jahre. 
+
+Für gebrauchte Materialien gilt eine Gewährleistungsfrist von einem Jahr ab Übergabe bzw. Einbau, sofern nicht anders vereinbart.
+
+Hat sich ein Mangel innerhalb der Verjährungsfrist gezeigt, so tritt die Verjährung nicht vor dem Ablauf von vier Monaten nach dem Zeitpunkt ein, in dem sich der Mangel erstmals gezeigt hat. 
+
+Hat der Besteller zur Nacherfüllung oder zur Erfüllung von Ansprüchen aus einer Garantie die Ware an uns oder auf unsere Veranlassung einem Dritten übergeben, so tritt die Verjährung von Ansprüchen wegen des geltend gemachten Mangels nicht vor Ablauf von zwei Monaten nach dem Zeitpunkt ein, in dem die nachgebesserte oder ersetzte Ware dem Besteller übergeben wurde. 
+
+\Clause[title={Schadensersatz}]
+
+Schadensersatzansprüche zu den nachfolgenden Bedingungen wegen des Mangels kann der Besteller erst geltend machen, wenn die Nacherfüllung fehlgeschlagen ist oder wir die Nacherfüllung verweigert haben. 
+
+Der Besteller hat uns keine Frist zur Nacherfüllung zu setzen. 
+
+Sobald der Besteller uns über den Mangel unterrichtet hat, eine angemessene Frist abgelaufen ist und bis dahin keine Nacherfüllung erfolgt ist, ist der Besteller ebenfalls zur Geltendmachung von Schadensersatzansprüchen berechtigt. 
+
+Das Recht des Bestellers zur Geltendmachung von weitergehenden Schadensersatzansprüchen zu den nachfolgenden Bedingungen bleibt davon unberührt.
+
+\Clause[title={Haftung}]
+
+Wir haften unbeschadet vorstehender Regelungen und der nachfolgenden Haftungsbeschränkungen uneingeschränkt für Schäden an Leben, Körper und Gesundheit, die auf einer fahrlässigen oder vorsätzlichen Pflichtverletzung unserer gesetzlichen Vertretern oder unserer Erfüllungsgehilfen beruhen, sowie für Schäden, die von der Haftung nach dem Produkthaftungsgesetz umfasst werden, sowie für alle Schäden, die auf vorsätzlichen oder grob fahrlässigen Vertragsverletzungen sowie Arglist, unserer gesetzlichen Vertreter oder unserer Erfüllungsgehilfen beruhen. 
+
+Soweit wir bezüglich der Ware oder Teile derselben eine Beschaffenheits- und/oder Haltbarkeitsgarantie abgegeben hat, haften wir auch im Rahmen dieser Garantie. 
+
+Für Schäden, die auf dem Fehlen der garantierten Beschaffenheit oder Haltbarkeit beruhen, aber nicht unmittelbar an der Ware eintreten, haften wir allerdings nur dann, wenn das Risiko eines solchen Schadens ersichtlich von der Beschaffenheits- und Haltbarkeitsgarantie erfasst ist.
+
+Wir haften auch für Schäden, die durch einfache Fahrlässigkeit verursacht werden, soweit diese Fahrlässigkeit die Verletzung solcher Vertragspflichten betrifft, deren Einhaltung für die Erreichung des Vertragszwecks von besonderer Bedeutung ist (Kardinalpflichten).\label{ps:kardinalpflichten}
+
+Wir haften jedoch nur, soweit die Schäden in typischer Weise mit dem Vertrag verbunden und vorhersehbar sind. 
+
+Bei einfachen fahrlässigen Verletzungen nicht vertragswesentlicher Nebenpflichten haften wir im Übrigen nicht.\label{ps:nichtvertragswesentlich}
+
+Die in den Sätzen \refParS{ps:kardinalpflichten}-\refParS{ps:nichtvertragswesentlich} enthaltenen Haftungsbeschränkungen gelten auch, soweit die Haftung für die gesetzlichen Vertreter, leitenden Angestellten und sonstigen Erfüllungsgehilfen betroffen ist.
+
+Eine weitergehende Haftung ist ohne Rücksicht auf die Rechtsnatur des geltend gemachten Anspruchs ausgeschlossen. Soweit unsere Haftung ausgeschlossen oder beschränkt ist, gilt dies auch für die persönliche Haftung unserer Angestellten, Arbeitnehmer, Mitarbeiter, Vertreter und Erfüllungsgehilfen.
+
+
+\end{contract}
+
+\section{Schlussbestimmungen}
+
+\begin{contract}
+
+Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist \companyLocation{}, sofern gesetzlich zulässig.
+
+Sollten einzelne Bestimmungen dieser AGB unwirksam sein, so bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
+
+
+\end{contract}
+
+
+\end{document}

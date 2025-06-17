@@ -1,0 +1,250 @@
+\documentclass[fontsize=12pt,parskip=half]{scrartcl}
+\usepackage[ngerman]{babel}
+%\usepackage{german}
+\usepackage{eurosym}
+\usepackage[T1]{fontenc}
+% Hinweis: Nur einer der beiden folgenden Zeilen wird benötigt.
+%\usepackage{lmodern}
+\usepackage{charter,helvet}
+
+\usepackage{lastpage} 
+\usepackage{enumerate}
+\usepackage{endnotes}
+
+\usepackage{ifthen}
+\usepackage{pgffor}
+\usepackage{fp}
+\usepackage{makecell}
+
+\usepackage{siunitx}
+
+
+% Definition für Euro-Darstellung
+\sisetup{
+  locale = DE,           % Deutsche Zahlenformatierung
+  group-separator = {.}, % Tausendertrennzeichen (Punkt)
+  output-decimal-marker = {,} % Dezimaltrennzeichen (Komma)
+}
+
+%\newcommand{\eurodash}[1]{\EUR{#1}}
+\newcommand{\eurodash}[1]{%
+  \num[group-minimum-digits=4,round-precision=0,round-mode=places]{#1},--~€%
+}
+\newcommand{\tsep}[1]{\num[group-minimum-digits=4,round-precision=0,round-mode=places]{#1}}
+
+%\usepackage[clausemark=forceboth,juratotoc,juratocnumberwidth=2.5em]{contract}
+\usepackage[juratotoc,juratocnumberwidth=2.5em]{contract}
+\useshorthands{'}
+\defineshorthand{'S}{\Sentence\ignorespaces}
+\defineshorthand{'.}{. \Sentence\ignorespaces}
+\RedeclareSectionCommand[
+  beforeskip=-1ex plus -0.5ex minus -0.5ex,
+  afterskip=0.5ex plus 0.2ex minus 0.2ex
+]{section}
+
+\input{variables.tex}
+
+\author{}
+
+\usepackage[breaklinks=false]{hyperref} % Ermöglicht klickbare Links
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={Allgemeine Geschäftsbedingungen der \companyName - Geschäftskunden},
+    pdfauthor={\authorName},
+    pdfcreator={LaTeX}
+}
+\usepackage{fancyhdr} % Paket für Kopf- und Fußzeilen
+
+\pagestyle{fancy}
+\fancyhf{} 
+
+%\fancyfoot[R]{Seite \thepage} % Seitennummer rechts
+
+%\pagestyle{myheadings}
+\fancyhead[R]{\leftmark}
+\fancyfoot[R]{\companyName\ - \companyLocation\ - \effDate \hspace{0.5cm}-\hspace{0.5cm}Seite \thepage\ von\ \pageref*{LastPage}} % Datum rechts
+
+% Reduzierung des Abstands vor \Clause
+
+
+\newcommand{\refCPS}[1]{\refClause{#1}~\refParS{#1}}
+\renewcommand{\notesname}{Endnoten}
+
+
+\begin{document}
+\setkeys{contract}{preskip=0.5ex,postskip=0.3ex}
+
+\subject{\large Allgemeine Geschäftsbedingungen - Geschäftskunden}
+\title{\large \companyName}
+\subtitle{\normalsize \companyLocation}
+\date{\small \effDate}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Allgemeines}
+
+\begin{contract}
+
+\Clause[title={Geltungsbereich}]
+
+Diese AGB gelten für alle Verträge mit Unternehmen, juristischen Personen des öffentlichen Rechts oder öffentlich-rechtlichen Sondervermögen. Verbraucher im Sinne des §13 BGB sind hiervon ausgeschlossen. Für Verbraucher gelten gesonderte Bedingungen.
+
+Diese Verkaufsbedingungen gelten auch für alle zukünftigen Geschäfte mit dem Besteller, soweit es sich um Rechtsgeschäfte verwandter Art handelt 
+
+Im Einzelfall getroffene, individuelle Vereinbarungen mit dem Käufer (einschließlich Nebenabreden, Ergänzungen und Änderungen) haben in jedem Fall Vorrang vor diesen Verkaufsbedingungen. Für den Inhalt derartiger Vereinbarungen ist, vorbehaltlich des Gegenbeweises, ein schriftlicher Vertrag bzw. unsere schriftliche Bestätigung maßgebend.
+
+\Clause[title={Vertragsgrundlagen}]
+
+Vertragsgrundlage sind das individuell angenommene Angebot und diese AGB. Abweichungen im Angebot haben Vorrang. 
+
+Änderungen und Ergänzungen des Vertrages bedürfen der Schriftform. Mündliche Nebenabreden haben keine Gültigkeit.
+
+Sofern eine Bestellung als Angebot gemäß Paragraf 145 BGB anzusehen ist, können wir diese innerhalb von zwei Wochen annehmen.
+
+\Clause[title={Unterlagen und Rechte}]
+
+Die \companyName{} behält sich sämtliche Eigentums- und Urheberrechte an Angeboten, Zeichnungen, Kalkulationen und weiteren Unterlagen vor. Sie dürfen ohne ausdrückliche schriftliche Zustimmung nicht an Dritte weitergegeben werden.
+
+Soweit wir das Angebot des Bestellers nicht innerhalb der Frist von Abschnitt II. annehmen, sind diese Unterlagen uns unverzüglich zurückzusend.
+
+\Clause[title={Mitwirkungspflichten des Auftraggebers}]
+
+Der Auftraggeber ist verpflichtet, alle bauseits erforderlichen Leistungen und Genehmigungen rechtzeitig und auf eigene Kosten bereitzustellen. Verzögerungen durch unterlassene Mitwirkung führen zur angemessenen Fristverlängerung und ggf. zur Kostenanpassung.
+
+\end{contract}
+
+\section{Preise und Zahlung}
+
+\begin{contract}
+
+\Clause[title={Preise}]
+
+Maßgeblich sind die im Angebot genannten Preise. Nicht ausdrücklich vereinbarte Leistungen werden auf Nachweis nach den jeweils gültigen Stundensätzen der \companyName{} abgerechnet. Verpackung, Transport und Versicherungen werden gesondert berechnet.
+
+\Clause[title={Zahlungsbedingungen}]
+
+Zahlungen sind, sofern nicht anders vereinbart, binnen 10 Tagen nach Rechnungsstellung ohne Abzug fällig. Bei Zahlungsverzug ist \companyName{} berechtigt, Verzugszinsen in gesetzlicher Höhe zu verlangen.
+
+Zahlungen haben ausschließlich auf das Konto \newline
+\begin{minipage}[t]{\dimexpr\linewidth-2em}
+  \vspace{0.1em}\hspace{2em}
+\begin{tabular}{ll}
+  \textbf{IBAN} & \accountIBAN{} \\
+  \textbf{BIC} & \accountBIC{} \\
+  \textbf{Bank} & \accountBank{} \\
+\end{tabular}\vspace{0.5em}
+\end{minipage}\newline
+zu erfolgen. 
+
+Der Abzug von Skonto ist nur bei schriftlicher besonderer Vereinbarung zulässig.
+
+Sofern keine Festpreisabrede getroffen wurde, bleiben angemessene Preisänderungen wegen veränderter Lohn-, Material- und Vertriebskosten für Lieferungen, die drei Monate oder später nach Vertragsabschluss erfolgen, vorbehalten.
+
+\Clause[title={Sicherheiten}]
+
+Die \companyName{} kann vor Ausführung ihrer Leistung die Stellung einer Sicherheit (z.B. Bürgschaft) in Höhe der vertraglichen Vergütung verlangen. Bei ausbleibender Sicherheit ist sie berechtigt, vom Vertrag zurückzutreten.
+
+\Clause[title={Aufrechnung und Zurückbehaltung}]
+
+Ein Zurückbehaltungsrecht ist nur zulässig, wenn es auf demselben Vertragsverhältnis beruht. 
+
+Aufrechnung ist nur mit unbestrittenen oder rechtskräftig festgestellten Forderungen zulässig.
+
+\end{contract}
+
+\section{Leistungserbringung}
+
+\begin{contract}
+
+\Clause[title={Termine und Fristen}]
+
+Lieferungen und Leistungen stehen unter dem Vorbehalt rechtzeitiger Selbstbelieferung. Die \companyName{} wird den Auftraggeber unverzüglich über Verzögerungen informieren. 
+
+Termine sind nur verbindlich, wenn sie schriftlich bestätigt wurden. Bei höherer Gewalt oder unvorhergesehenen Hindernissen verschieben sich Fristen entsprechend. Beginnt der Auftraggeber nicht rechtzeitig mit seiner Mitwirkung, verschieben sich auch die Ausführungsfristen.
+
+Der Beginn der von uns angegebenen Lieferzeit setzt die rechtzeitige und ordnungsgemäße Erfüllung der Verpflichtungen des Bestellers voraus. Die Einrede des nicht erfüllten Vertrages bleibt vorbehalten.
+
+Kommt der Besteller in Annahmeverzug oder verletzt er schuldhaft sonstige Mitwirkungspflichten, so sind wir berechtigt, den uns insoweit entstehenden Schaden, einschließlich etwaiger Mehraufwendungen ersetzt zu verlangen. Weitergehende Ansprüche bleiben vorbehalten. 
+
+Sofern vorstehende Voraussetzungen vorliegen, geht die Gefahr eines zufälligen Untergangs oder einer zufälligen Verschlechterung der Kaufsache in dem Zeitpunkt auf den Besteller über, in dem dieser in Annahme- oder Schuldnerverzug geraten ist.
+
+\Clause[title={Abnahme und Gefahrübergang bei Werkleistungen}]
+
+Die Abnahme erfolgt nach Fertigstellung. Erfolgt keine Abnahme innerhalb einer angemessenen Frist oder wird die Leistung genutzt, gilt sie als abgenommen. Bei Verzug des Auftraggebers geht die Gefahr über.
+
+\Clause[title={Lieferung und Gefahrübergang bei Waren}]
+
+Warenlieferungen erfolgen ab Lager der \companyName{} oder direkt vom Zulieferer auf Rechnung und Gefahr des Auftraggebers. 
+
+Die Versandart wählt die \companyName{}. 
+
+Die Gefahr geht bei Übergabe an den Spediteur oder Frachtführer über.
+
+\Clause[title={Eigentumsvorbehalt}]
+
+Wir behalten uns das Eigentum an der gelieferten Sache bis zur vollständigen Zahlung sämtlicher Forderungen aus dem Liefervertrag vor. Dies gilt auch für alle zukünftigen Lieferungen, auch wenn wir uns nicht stets ausdrücklich hierauf berufen. Wir sind berechtigt, die Kaufsache zurückzufordern, wenn der Besteller sich vertragswidrig verhält.
+
+Der Besteller ist verpflichtet, solange das Eigentum noch nicht auf ihn übergegangen ist, die Kaufsache pfleglich zu behandeln. Insbesondere ist er verpflichtet, diese auf eigene Kosten gegen Diebstahl-, Feuer- und Wasserschäden ausreichend zum Neuwert zu versichern . 
+
+Müssen Wartungs- und Inspektionsarbeiten durchgeführt werden, hat der Besteller diese auf eigene Kosten rechtzeitig auszuführen. Solange das Eigentum noch nicht übergegangen ist, hat uns der Besteller unverzüglich schriftlich zu benachrichtigen, wenn der gelieferte Gegenstand gepfändet oder sonstigen Eingriffen Dritter ausgesetzt ist. Soweit der Dritte nicht in der Lage ist, uns die gerichtlichen und außergerichtlichen Kosten einer Klage gemäß \href{https://www.gesetze-im-internet.de/zpo/__771.html}{ZPO §771} zu erstatten, haftet der Besteller für den uns entstandenen Ausfall.
+
+Der Besteller ist zur Weiterveräußerung der Vorbehaltsware im normalen Geschäftsverkehr berechtigt. Die Forderungen gegenüber dem Abnehmer aus der Weiterveräußerung der Vorbehaltsware tritt der Besteller schon jetzt an uns in Höhe des mit uns vereinbarten Faktura-Endbetrages (einschließlich Mehrwertsteuer) ab. Diese Abtretung gilt unabhängig davon, ob die Kaufsache ohne oder nach Verarbeitung weiterverkauft worden ist. Der Besteller bleibt zur Einziehung der Forderung auch nach der Abtretung ermächtigt. Unsere Befugnis, die Forderung selbst einzuziehen, bleibt davon unberührt. Wir werden jedoch die Forderung nicht einziehen, solange der Besteller seinen Zahlungsverpflichtungen aus den vereinnahmten Erlösen nachkommt, nicht in Zahlungsverzug ist und insbesondere kein Antrag auf Eröffnung eines Insolvenzverfahrens gestellt ist oder Zahlungseinstellung vorliegt. 
+
+Die Be- und Verarbeitung oder Umbildung der Kaufsache durch den Besteller erfolgt stets Namens und im Auftrag für uns. In diesem Fall setzt sich das Anwartschaftsrecht des Bestellers an der Kaufsache an der umgebildeten Sache fort. Sofern die Kaufsache mit anderen, uns nicht gehörenden Gegenständen verarbeitet wird, erwerben wir das Miteigentum an der neuen Sache im Verhältnis des objektiven Wertes unserer Kaufsache zu den anderen bearbeiteten Gegenständen zur Zeit der Verarbeitung. Dasselbe gilt für den Fall der Vermischung. Sofern die Vermischung in der Weise erfolgt, dass die Sache des Bestellers als Hauptsache anzusehen ist, gilt als vereinbart, dass der Besteller uns anteilmäßig Miteigentum überträgt und das so entstandene Alleineigentum oder Miteigentum für uns verwahrt. Zur Sicherung unserer Forderungen gegen den Besteller tritt der Besteller auch solche Forderungen an uns ab, die ihm durch die Verbindung der Vorbehaltsware mit einem Grundstück gegen einen Dritten erwachsen; wir nehmen diese Abtretung bereits jetzt an.
+
+Wir verpflichten uns, die uns zustehenden Sicherheiten auf Verlangen des Bestellers freizugeben, soweit ihr Wert die zu sichernden Forderungen um mehr als 20 \% übersteigt.
+
+\end{contract}
+
+\section{Gewährleistung und Haftung}
+
+\begin{contract}
+
+\Clause[title={Gewährleistungsrechte}]
+
+Gewährleistungsrechte des Bestellers setzen voraus, dass dieser seinen nach \href{https://www.gesetze-im-internet.de/hgb/__377.html}{HGB §377} geschuldeten Untersuchungs- und Rügeobliegenheiten ordnungsgemäß nachgekommen ist.
+
+\Clause[title={Mängel bei Werkleistungen}]
+
+Mängel sind unverzüglich schriftlich anzuzeigen. \companyName{} hat ein dreimaliges Nachbesserungsrecht. Bei endgültigem Scheitern kann der Auftraggeber mindern oder in Ausnahmefällen den Vertrag kündigen.
+
+\Clause[title={Mängel bei Warenlieferungen}]
+
+Kaufleute haben offensichtliche Mängel sofort zu rügen. Erfolgt dies nicht, gilt die Ware als genehmigt. Bei berechtigten Mängeln erfolgt Nachbesserung oder Ersatzlieferung. Weitere Ansprüche bestehen nur bei Verzug oder Verweigerung.
+
+Soweit das Gesetz gemäß \href{https://www.gesetze-im-internet.de/bgb/__438.html}{BGB §438 Abs. 1 Nr. 2} (Bauwerke und Sachen für Bauwerke), \href{https://www.gesetze-im-internet.de/bgb/__445.html}{BGB §445 b} (Rückgriffsanspruch) und \href{https://www.gesetze-im-internet.de/bgb/__634.html}{BGB §634a Abs. 1} (Baumängel) längere Fristen zwingend vorschreibt, gelten diese Fristen. 
+
+Sollte trotz aller aufgewendeter Sorgfalt die gelieferte Ware einen Mangel aufweisen, der bereits zum Zeitpunkt des Gefahrübergangs vorlag, so werden wir die Ware, vorbehaltlich fristgerechter Mängelrüge nach unserer Wahl nachbessern oder Ersatzware liefern. Es ist uns stets Gelegenheit zur Nacherfüllung innerhalb angemessener Frist zu geben. Rückgriffsansprüche bleiben hiervon ohne Einschränkung unberührt.
+
+Vor etwaiger Rücksendung der Ware ist unsere Zustimmung einzuholen.
+
+
+\Clause[title={Verjährung}]
+
+Die Gewährleistungsfrist beträgt bei Bauleistungen fünf Jahre, bei Wartung und Reparatur sowie bei Lieferungen zwei Jahre, jeweils ab Abnahme oder Lieferung. 
+
+Bei Nichtbeachtung vereinbarter Wartungspflichten kann sich die Frist auf zwei Jahre verkürzen.
+
+\Clause[title={Haftung}]
+
+Die \companyName{} haftet unbeschränkt für Schäden aus der Verletzung von Leben, Körper oder Gesundheit sowie bei Vorsatz und grober Fahrlässigkeit. Bei einfacher Fahrlässigkeit ist die Haftung auf vertragstypische Schäden begrenzt.
+
+\end{contract}
+
+\section{Schlussbestimmungen}
+
+\begin{contract}
+
+Sollte eine Bestimmung dieser AGB unwirksam sein oder werden, bleiben die übrigen Bestimmungen unberührt. Die Parteien verpflichten sich, eine Regelung zu vereinbaren, die dem wirtschaftlichen Zweck der unwirksamen möglichst nahekommt.
+
+Erfüllungsort und ausschließlicher Gerichtsstand und für alle Streitigkeiten aus diesem Vertrag ist unser Geschäftssitz \companyLocation{}, sofern sich aus der Auftragsbestätigung nichts anderes ergibt. Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts.
+
+\end{contract}
+
+
+\end{document}
