@@ -45,8 +45,9 @@ Die generierten PDFs werden als **Build-Artifact** bereitgestellt und ggf. in ei
 
 ## 🧾 Verwendungshinweis
 
-Diese AGB dürfen von Dritten **nicht ohne Genehmigung** übernommen werden.  
-Die Texte sind individuell auf die Leistungen und rechtlichen Rahmenbedingungen der **Elektro-Glaser GmbH** abgestimmt.
+Die Texte sind individuell auf die Leistungen und rechtlichen Rahmenbedingungen der **Elektro-Glaser GmbH** abgestimmt. Wir übernehmen keinerlei Gewähr für deren Richtigkeit.
+
+**Verwendung auf eigenes Risiko**
 
 ---
 
