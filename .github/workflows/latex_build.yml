@@ -170,7 +170,7 @@ jobs:
         id: files
         run: |
           echo "files<<EOF" >> $GITHUB_OUTPUT
-          find artifacts/versioned/ -name "*.pdf" >> GITHUB_OUTPUT
+          find artifacts/versioned/ -name "*.pdf" >> $GITHUB_OUTPUT
           cat artifacts/pdf_list_absolute.txt >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
