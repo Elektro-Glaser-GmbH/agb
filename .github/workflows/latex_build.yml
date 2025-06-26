@@ -1,6 +1,10 @@
 name: Build and Release LaTeX AGBs
 
 on:
+  workflow_run:
+    workflows: ["Auto Tag with Semantic Versioning"]
+    types:
+      - completed
   push:
     tags:
       - 'v*'          # Trigger nur bei Tags wie v1.0.0, v2.1 etc.
