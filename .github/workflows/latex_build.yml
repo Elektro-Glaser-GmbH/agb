@@ -173,13 +173,17 @@ jobs:
           echo "Content of filelist.txt:"
           cat filelist.txt
 
+      - name: Set RELEASE_FILES
+        run: |
+          FILES=$(cat filelist.txt)
+          echo "RELEASE_FILES=$FILES" >> $GITHUB_ENV
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.SEM_VERSION }}
           name: "Release v${{ env.SEM_VERSION }}"
-          files: |
-            @filelist.txt
+          files: ${{ env.RELEASE_FILES }}
           body_path: changelog.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
