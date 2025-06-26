@@ -2,12 +2,12 @@
 
 Allgemeine Geschäftsbedingungen Elektro-Glaser GmbH
 
-[![Latest Release](https://img.shields.io/github/v/release/Elektro-Glaser-GmbH/agb?label=release)](https://github.com/the78mole/agb/releases/latest)
 [![PDF – Privatkunden](https://img.shields.io/badge/Download-PDF--Privatkunden-blue)](https://github.com/Elektro-Glaser-GmbH/agb/releases/latest/download/agb_privat.pdf)
 [![PDF – Geschäftskunden](https://img.shields.io/badge/Download-PDF--Geschäftskunden-blue)](https://github.com/Elektro-Glaser-GmbH/agb/releases/latest/download/agb_geschaeft.pdf)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-![Build Status](https://github.com/Elektro-Glaser-GmbH/agb/actions/workflows/latex_build.yml/badge.svg?branch=main)](https://github.com/Elektro-Glaser-GmbH/agb/actions/workflows/latex_build.yml)
+[![Build Status](https://github.com/Elektro-Glaser-GmbH/agb/actions/workflows/latex_build.yml/badge.svg)](https://github.com/Elektro-Glaser-GmbH/agb/actions/workflows/latex_build.yml)
+[![Latest Release](https://img.shields.io/github/v/release/Elektro-Glaser-GmbH/agb?label=release)](https://github.com/the78mole/agb/releases/latest)
 
 
 # 📄 Allgemeine Geschäftsbedingungen (AGB) – Elektro-Glaser GmbH
