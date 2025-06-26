@@ -3,8 +3,8 @@ name: Build and Release LaTeX AGBs
 on:
   push:
     tags:
-      - 'v*'         # Trigger nur bei Tags wie v1.0.0, v2.1 etc.
-  workflow_dispatch: # Optional: manueller Trigger über GitHub UI
+      - 'v*'          # Trigger nur bei Tags wie v1.0.0, v2.1 etc.
+  workflow_dispatch:  # Optional: manueller Trigger über GitHub UI
 
 permissions:
   contents: write
@@ -15,9 +15,6 @@ jobs:
     strategy:
       matrix:
         file: [agb_privat, agb_geschaeft]
-
-    outputs:
-      pdf_paths: ${{ steps.set-output.outputs.pdfs }}
 
     steps:
       - name: Check out repository
@@ -31,15 +28,22 @@ jobs:
           root_file: ${{ matrix.file }}.tex
           args: -synctex=0 -interaction=nonstopmode --shell-escape -pdf -file-line-error
 
-      #- name: Rename output PDF
-      #  run: |
-      #    mv ${{ matrix.file }}.pdf build-${{ matrix.file }}.pdf
-
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.file }}-pdf
           path: ${{ matrix.file }}.pdf
+
+      - name: Append to pdf_list.txt
+        run: |
+          mkdir -p pdflist
+          echo "${{ matrix.file }}-pdf/${{ matrix.file }}.pdf" >> pdflist/pdf_list.txt
+
+      - name: Upload pdf_list.txt
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-list-${{ matrix.file }}
+          path: pdflist/pdf_list.txt
 
   create_release:
     needs: build_latex
@@ -56,17 +60,48 @@ jobs:
         with:
           path: artifacts
 
-      - name: List downloaded files
+      - name: Extract tag version
+        id: version
+        run: echo "TAG_VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+
+      - name: List downloaded filesAdd commentMore actions
         run: ls -R artifacts
+
+      - name: Install pdfunite
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Merge PDFs into a single file
+        run: |
+          > artifacts/pdf_list_absolute.txt
+          for f in $(find artifacts -name "pdf_list.txt"); do
+            while read -r line; do
+              echo "artifacts/$line" >> artifacts/pdf_list_absolute.txt
+            done < "$f"
+          done
+
+          echo "PDFs to merge:"
+          cat artifacts/pdf_list_absolute.txt
+
+          pdfunite $(cat artifacts/pdf_list_absolute.txt) \
+            artifacts/AGB_Gesamt.pdf
+      
+      - name: Rename PDFs with version suffix
+        run: |
+          mkdir -p artifacts/versioned
+          while read -r pdf; do
+            base=$(basename "$pdf" .pdf)
+            cp "$pdf" "artifacts/versioned/${base}_${TAG_VERSION}.pdf"
+          done < artifacts/pdf_list_absolute.txt
+
+          cp artifacts/AGB_Gesamt.pdf \
+            artifacts/versioned/AGB_Gesamt_${TAG_VERSION}.pdf
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
           name: "Release ${{ github.ref_name }}"
-          files: |
-            artifacts/agb_privat-pdf/agb_privat.pdf
-            artifacts/agb_geschaeft-pdf/agb_geschaeft.pdf
+          files: artifacts/versioned/*.pdf
           body: |
             Automatisch generierter Release mit AGB-Dokumenten.
         env:
