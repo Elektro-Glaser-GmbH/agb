@@ -170,6 +170,8 @@ jobs:
         run: |
           echo artifacts/versioned/*.pdf > filelist.txt
           cat artifacts/pdf_list_absolute.txt >> filelist.txt
+          echo "Content of filelist.txt:"
+          cat filelist.txt
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
