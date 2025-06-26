@@ -111,6 +111,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Generate changelog
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0)
+          echo "Commits since $LAST_TAG:"
+          echo "## Changelog since $LAST_TAG" > changelog.md
+          git log "$LAST_TAG"..HEAD --pretty=format:"- %s (%an)" \
+            >> changelog.md
+          
+        
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
@@ -167,8 +176,7 @@ jobs:
           tag_name: v${{ env.SEM_VERSION }}
           name: "Release v${{ env.SEM_VERSION }}"
           files: ${{ env.RELEASE_FILES }}
-          body: |
-            Automatisch generierter Release mit AGB-Dokumenten.
+          body_path: changelog.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEM_VERSION: ${{ needs.create_version.outputs.semver }}
