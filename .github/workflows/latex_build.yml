@@ -166,24 +166,25 @@ jobs:
           cp artifacts/AGB_Gesamt.pdf \
             artifacts/versioned/AGB_Gesamt_${TAG_VERSION}.pdf
 
-      - name: Create file list
+      - name: Set files list output from file
+        id: files
         run: |
-          echo artifacts/versioned/*.pdf > filelist.txt
-          cat artifacts/pdf_list_absolute.txt >> filelist.txt
-          echo "Content of filelist.txt:"
-          cat filelist.txt
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          find artifacts/versioned/ -name "*.pdf" >> GITHUB_OUTPUT
+          cat artifacts/pdf_list_absolute.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Set RELEASE_FILES
+      - name: Files to be released
         run: |
-          FILES=$(paste -sd' ' filelist.txt)
-          echo "RELEASE_FILES=$FILES" >> $GITHUB_ENV
+          echo "Files to be released:"
+          echo "${{ steps.files.outputs.files }}"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.SEM_VERSION }}
           name: "Release v${{ env.SEM_VERSION }}"
-          files: ${{ env.RELEASE_FILES }}
+          files: ${{ steps.files.outputs.files }}
           body_path: changelog.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
