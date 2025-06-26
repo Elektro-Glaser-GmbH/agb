@@ -1,20 +1,60 @@
 name: Build and Release LaTeX AGBs
 
 on:
-  workflow_run:
-    workflows: ["Auto Tag with Semantic Versioning"]
-    types:
-      - completed
   push:
+    branches:
+      - main
     tags:
-      - 'v*'          # Trigger nur bei Tags wie v1.0.0, v2.1 etc.
+      - 'v*'          # # Trigger bei Tags wie v1.0.0, v2.1 etc.
   workflow_dispatch:  # Optional: manueller Trigger über GitHub UI
 
 permissions:
   contents: write
 
 jobs:
+  create_version:
+    runs-on: ubuntu-latest
+
+    outputs:
+      tag_version: ${{ steps.setver.outputs.tag_version }}
+      semver: ${{ steps.semver.outputs.version }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate release version
+        id: semver
+        uses: paulhatch/semantic-version@v5.4.0
+        with:
+          branch: main
+          tag_prefix: "v"
+          major_pattern: "^(feat|fix|refactor)!:"
+          minor_pattern: "^feat:"
+          bump_each_commit: true
+          search_commit_body: true
+
+      - name: Log generated version
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            echo "Detected Git tag: ${GITHUB_REF_NAME}"
+            # Strip leading 'v' manually
+            echo "TAG_VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+          else
+            echo "Generated semver: ${{ steps.semver.outputs.version }}"
+            echo "TAG_VERSION=${{ steps.semver.outputs.version }}" \
+              >> $GITHUB_ENV
+          fi
+      
+      - name: Export TAG_VERSION to job outputs
+        id: setver
+        run: echo "tag_version=${TAG_VERSION#v}" >> $GITHUB_OUTPUT
+
+
   build_latex:
+    needs: create_version
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,10 +66,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Extract tag version
-        id: version
-        run: echo "TAG_VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
-
+      - name: Get Release Version
+        id: get_version
+        run: |
+          echo "TAG_VERSION=${{ needs.create_version.outputs.tag_version }}" \
+            >> $GITHUB_ENV
+      
       - name: Create version.tex
         run: |
           echo "\\newcommand{\\version}{${TAG_VERSION}}" \
@@ -59,7 +101,9 @@ jobs:
           path: pdflist/pdf_list.txt
 
   create_release:
-    needs: build_latex
+    needs: 
+      - build_latex 
+      - create_version
     runs-on: ubuntu-latest
 
     steps:
@@ -73,11 +117,15 @@ jobs:
         with:
           path: artifacts
 
-      - name: Extract tag version
-        id: version
-        run: echo "TAG_VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+      - name: Get Release Version
+        id: get_version
+        run: |
+          echo "TAG_VERSION=${{ needs.create_version.outputs.tag_version }}" \
+            >> $GITHUB_ENV
+          echo "SEM_VERSION=${{ needs.create_version.outputs.semver }}" \
+            >> $GITHUB_ENV
 
-      - name: List downloaded filesAdd commentMore actions
+      - name: List downloaded files
         run: ls -R artifacts
 
       - name: Install pdfunite
@@ -100,6 +148,7 @@ jobs:
       
       - name: Rename PDFs with version suffix
         run: |
+          echo "Tag version: ${TAG_VERSION}"
           mkdir -p artifacts/versioned
           while read -r pdf; do
             base=$(basename "$pdf" .pdf)
@@ -112,10 +161,11 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
-          name: "Release ${{ github.ref_name }}"
+          tag_name: v${{ env.SEM_VERSION }}
+          name: "Release v${{ env.SEM_VERSION }}"
           files: artifacts/versioned/*.pdf
           body: |
             Automatisch generierter Release mit AGB-Dokumenten.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SEM_VERSION: ${{ needs.create_version.outputs.semver }}
