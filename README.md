@@ -28,6 +28,7 @@ Die AGB liegen im PDF-Format vor und werden aus LaTeX-Quellen automatisiert erze
 ├── agb_privat.tex            # LaTeX-Quelle für Privatkunden
 ├── agb_geschaeft.tex         # LaTeX-Quelle für Geschäftskunden
 ├── variables.tex             # Globale Angaben (Firma, Ort, Datum)
+├── version.tex               # Wird im workflow automatisch erstellt
 ├── .github/workflows/
 │   └── build.yml             # GitHub Actions Workflow zum PDF-Build
 └── README.md
@@ -39,7 +40,7 @@ Die AGB liegen im PDF-Format vor und werden aus LaTeX-Quellen automatisiert erze
 
 Sobald Änderungen an den `.tex`-Dateien gepusht werden, erstellt GitHub Actions automatisch neue PDF-Dateien mithilfe von [`dante-ev/latex-action`](https://github.com/dante-ev/latex-action).
 
-Die generierten PDFs werden als **Build-Artifact** bereitgestellt und ggf. in einem Release veröffentlicht.
+Die generierten PDFs werden als **Build-Artifact** bereitgestellt und in einem Release veröffentlicht.
 
 ---
 
