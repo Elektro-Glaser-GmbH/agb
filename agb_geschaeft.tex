@@ -18,6 +18,7 @@
 
 \usepackage{siunitx}
 
+\input{version.tex}
 
 % Definition für Euro-Darstellung
 \sisetup{
@@ -63,6 +64,7 @@
 %\fancyfoot[R]{Seite \thepage} % Seitennummer rechts
 
 %\pagestyle{myheadings}
+\fancyhead[L]{V\version}
 \fancyhead[R]{\leftmark}
 \fancyfoot[R]{\companyName\ - \companyLocation\ - \effDate \hspace{0.5cm}-\hspace{0.5cm}Seite \thepage\ von\ \pageref*{LastPage}} % Datum rechts
 
@@ -79,7 +81,7 @@
 \subject{\large Allgemeine Geschäftsbedingungen - Geschäftskunden}
 \title{\large \companyName}
 \subtitle{\normalsize \companyLocation}
-\date{\small \effDate}
+\date{\small \effDate\ (V\version)}
 \maketitle
 
 \tableofcontents

@@ -22,6 +22,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Extract tag version
+        id: version
+        run: echo "TAG_VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+
+      - name: Create version.tex
+        run: |
+          echo "\\newcommand{\\version}{${TAG_VERSION}}" \
+            > version.tex
+
       - name: Compile LaTeX document ${{ matrix.file }}.tex
         uses: dante-ev/latex-action@latest
         with:
