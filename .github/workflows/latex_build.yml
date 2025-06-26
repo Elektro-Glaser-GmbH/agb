@@ -166,16 +166,18 @@ jobs:
           cp artifacts/AGB_Gesamt.pdf \
             artifacts/versioned/AGB_Gesamt_${TAG_VERSION}.pdf
 
-      - name: Export dynamic file list
+      - name: Create file list
         run: |
-          echo "RELEASE_FILES=artifacts/versioned/*.pdf $(cat artifacts/pdf_list_absolute.txt)" >> $GITHUB_ENV
+          echo artifacts/versioned/*.pdf > filelist.txt
+          cat artifacts/pdf_list_absolute.txt >> filelist.txt
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.SEM_VERSION }}
           name: "Release v${{ env.SEM_VERSION }}"
-          files: ${{ env.RELEASE_FILES }}
+          files: |
+            @filelist.txt
           body_path: changelog.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
