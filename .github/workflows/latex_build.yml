@@ -175,7 +175,7 @@ jobs:
 
       - name: Set RELEASE_FILES
         run: |
-          FILES=$(cat filelist.txt)
+          FILES=$(paste -sd' ' filelist.txt)
           echo "RELEASE_FILES=$FILES" >> $GITHUB_ENV
 
       - name: Create GitHub Release
