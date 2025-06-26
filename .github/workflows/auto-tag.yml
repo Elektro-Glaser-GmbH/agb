@@ -1,0 +1,36 @@
+name: Auto Tag with Semantic Versioning
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  tag_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate release version
+        id: semver
+        uses: paulhatch/semantic-version@v5.4.0
+        with:
+          tag_prefix: "v"
+          major_pattern: "^(feat|fix|refactor)!:"
+          minor_pattern: "^feat:"
+          search_commit_body: true
+
+      - name: Print version
+        run: echo "Version is ${{ steps.semver.outputs.version }}"
+
+      - name: Create Git tag
+        run: |
+          git tag v${{ steps.semver.outputs.version }}
+          git push origin v${{ steps.semver.outputs.version }}
