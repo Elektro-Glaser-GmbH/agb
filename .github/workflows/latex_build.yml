@@ -21,13 +21,13 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Generate release version
         id: semver
-        uses: paulhatch/semantic-version@v5.4.0
+        uses: paulhatch/semantic-version@v6.0.4
         with:
           branch: main
           tag_prefix: "v"
@@ -61,7 +61,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -83,7 +83,7 @@ jobs:
           args: -synctex=0 -interaction=nonstopmode --shell-escape -pdf -file-line-error
 
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.file }}-pdf
           path: ${{ matrix.file }}.pdf
@@ -94,7 +94,7 @@ jobs:
           echo "${{ matrix.file }}-pdf/${{ matrix.file }}.pdf" >> pdflist/pdf_list.txt
 
       - name: Upload pdf_list.txt
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pdf-list-${{ matrix.file }}
           path: pdflist/pdf_list.txt
@@ -107,7 +107,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -121,7 +121,7 @@ jobs:
           
         
       - name: Download all artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
 
@@ -180,7 +180,7 @@ jobs:
           echo "${{ steps.files.outputs.files }}"
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ env.SEM_VERSION }}
           name: "Release v${{ env.SEM_VERSION }}"
